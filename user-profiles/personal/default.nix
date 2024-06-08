@@ -32,6 +32,7 @@
 
   # Install user packages
   home.packages = with pkgs; [
+    alacritty                # GPU-accelerated terminal emulator
     librewolf                # Firefox fork, focused on privacy and security
     thunderbird              # Fully-featured E-mail client
     telegram-desktop         # Telegram Desktop messaging app
