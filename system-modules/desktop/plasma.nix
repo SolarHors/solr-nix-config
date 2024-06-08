@@ -37,6 +37,9 @@
   # Exclude Plasma packages
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
+    kate
+    elisa
+    okular
     khelpcenter
     plasma-browser-integration
   ];
