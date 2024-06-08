@@ -14,8 +14,6 @@
       xkb.layout = "us,ru";
       # Set X keyboard variant
       xkb.variant = "";
-      # Touchpad support
-      libinput.enable = true;  
     };
     dbus = {
       # Enable D-Bus
@@ -23,6 +21,8 @@
       # Include dconf's config in D-Bus
       packages = [ pkgs.dconf ];
     };
+    # Touchpad support
+    libinput.enable = true;  
   };
 
   # Enable dconf settings management tool

@@ -18,7 +18,7 @@
     libsForQt5.xdg-desktop-portal-kde
   ];
 
-  services.xserver = {
+  services = {
     # Enable KDE Plasma 6
     desktopManager.plasma6.enable = true;
     # Configure display manager
