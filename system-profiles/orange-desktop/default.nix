@@ -58,7 +58,20 @@
     loader.systemd-boot.configurationLimit = 5;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    initrd.kernelModules = ["amdgpu"];
+    supportedFilesystems = [ "btrfs" ];
+    initrd.kernelModules = [ "amdgpu" ];
+
+    # TODO: Make encryption more convenient to configure
+    # Unlock encrypted root device
+    initrd.luks.devices = {
+      root = {
+        # ATTENTION! Set this to the UUID of the partition
+        # that contains the encrypted LUKS root
+        device = "/dev/disk/by-uuid/<root-uuid>";
+        preLVM = true;
+        allowDiscards = true;  # SSD optimizations
+      };
+    };
   };
 
   # Hardware configuration for AMD
