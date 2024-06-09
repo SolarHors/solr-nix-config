@@ -11,7 +11,7 @@ description = "Solar Flare"
 # Email address for security configuration
 email = "orange.hors@proton.me"
 # Selected desktop environment / window manager
-desktop = "hyprland"  # Either "hyprland", "plasma" or "gnome"
+desktop = "plasma"  # Either "hyprland" or "plasma"
 
 # Theme settings are used both in system and user Stylix configurations
 [theme]
