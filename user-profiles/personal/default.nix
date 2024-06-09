@@ -45,6 +45,8 @@
     transmission_4-gtk       # BitTorrent client
     onlyoffice-bin           # Office suite
     localsend                # Local file sharing between devices
+    pika-backup              # Backup utility based on borg
+    gvfs                     # Virtual Filesystem support library
     mpv                      # Media player
     papirus-icon-theme       # Papirus icon theme
     tealdeer                 # Simplified and community-driven man pages
