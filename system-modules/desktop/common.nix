@@ -31,7 +31,9 @@
   # Configure desktop portal for wlroots-based desktops
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    # TODO: Find out why it conflicts with hyprland
+    # and if it's needed at all
+    #wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal
       xdg-desktop-portal-gtk
