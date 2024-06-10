@@ -11,6 +11,9 @@
 
 {
   imports = [
+    # Import the generated hardware configuration
+    ./hardware-configuration.nix
+
     # Use profiles from nixos-hardware for optimal settings
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-gpu-amd
@@ -28,6 +31,18 @@
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
     }.${personal_config.user.desktop}
 
+    # Enable sound
+    ../../system-modules/pipewire.nix
+
+    # Enable Open Tablet Driver
+    ../../system-modules/otd.nix
+
+    # Install font packages
+    ../../system-modules/fonts.nix
+
+    # Configure network shares
+    ../../system-modules/netshare.nix
+
     # Theme system applications
     ../../system-modules/stylix.nix
   ];
@@ -39,6 +54,8 @@
       # Profile TOML configuration settings
       inherit personal_config;
     };
+    # Overwrite config after backing it up
+    backupFileExtension = "backup";
     # Import home-manager configurations for users
     users.${personal_config.user.username} = import ../../user-profiles/personal;
   };
