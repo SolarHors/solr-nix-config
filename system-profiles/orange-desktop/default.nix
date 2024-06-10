@@ -19,9 +19,6 @@
     inputs.hardware.nixosModules.common-gpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
 
-    # Import the generated hardware configuration
-    ./hardware-configuration.nix
-
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
     
