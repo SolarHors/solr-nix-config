@@ -151,6 +151,8 @@
     pciutils                        # Tools for inspecting PCI device configs
     ffmpeg                          # A solution to manipulate audio and video
     wget                            # Tool for retrieving remote files
+    curl                            # Tool for transferring files with URL syntax
+    git                             # Distributed version control system
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
