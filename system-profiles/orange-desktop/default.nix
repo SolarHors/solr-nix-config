@@ -134,6 +134,13 @@
   networking = {
     hostName = "orange-desktop";
     networkmanager.enable = true;
+    nftables.enable = true;
+    firewall.enable = true;
+    nat.enable = true;
+
+    hosts = {
+      "127.0.0.1" = ["localhost"];
+    };
   };
 
   # Configure system-wide user settings
