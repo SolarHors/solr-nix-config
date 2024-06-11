@@ -16,7 +16,13 @@
       "plasma" = ../../user-modules/desktop/plasma.nix;
       "hyprland" = ../../user-modules/desktop/hyprland.nix;
     }.${personal_config.user.desktop}
-    
+
+    # Configure user shell and console-line tools
+    ../../user-modules/shell.nix
+
+    # Enable gaming configurations
+    ../../user-modules/games.nix
+
     # Install VSCodium
     ../../user-modules/vscodium.nix
   ];
