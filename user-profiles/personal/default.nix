@@ -38,7 +38,7 @@
     thunderbird              # Fully-featured E-mail client
     telegram-desktop         # Telegram Desktop messaging app
     webcord                  # Discord client implemented without Discord API
-    fluffychat               # Matrix chat client
+    iamb                     # Matrix chat client in the terminal
     blender-hip              # Blender with hardware accelerated rendering
     keepassxc                # Offline password manager
     godot_4                  # Godot 4 game engine
