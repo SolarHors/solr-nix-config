@@ -21,5 +21,5 @@
     gamescope    # Micro-compositor tailored towards gaming
     mangohud     # Overlay for monitoring game statistics
     bottles      # An easy-to-use wineprefix manager
-  ]
+  ];
 }

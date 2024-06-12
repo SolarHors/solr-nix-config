@@ -5,10 +5,10 @@
 let
   # Set aliases for command-line applications
   aliases = {
-    ls = "eza --icons -l -T -L=1"
-    cat = "bat"
-    top = "btm"
-    ps = "procs"
+    ls = "eza --icons -l -T -L=1";
+    cat = "bat";
+    top = "btm";
+    ps = "procs";
   };
 in {
   # Configure the Z shell
@@ -20,7 +20,7 @@ in {
     shellAliases = aliases;
     # Make use of the Powerlevel10k theme
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  }
+  };
 
   # Configure the Bourne-Again Shell
   programs.bash = {
@@ -39,5 +39,5 @@ in {
     fd       # A program to find entries in your filesystem
     # Theme for zsh
     zsh-powerlevel10k
-  ]
+  ];
 }
