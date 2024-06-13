@@ -49,7 +49,7 @@
   } @ inputs: let
     inherit (self) outputs;
     # TOML configuration for the system profile of `orange-desktop`
-    #orange_config = (builtins.fromTOML (builtins.readFile ./system-profiles/orange-desktop/config.toml));
+    orange_config = (builtins.fromTOML (builtins.readFile ./system-profiles/orange-desktop/config.toml));
     # TOML configuration for the user profile of `solar`
     solar_config = (builtins.fromTOML (builtins.readFile ./user-profiles/solar/config.toml));
   in {
@@ -62,7 +62,9 @@
           inherit inputs outputs;
           # Style system-wide applications
           inherit (inputs) stylix;
-          # Profile TOML configuration settings
+          # System profile TOML configuration settings
+          inherit orange_config;
+          # User profile TOML configuration settings
           inherit solar_config;
         };
         # System configuration
@@ -82,7 +84,7 @@
           inherit inputs outputs;
           # Style user-wide applications
           inherit (inputs) stylix;
-          # Profile TOML configuration settings
+          # User profile TOML configuration settings
           inherit solar_config;
         };
         # User configuration

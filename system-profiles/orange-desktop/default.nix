@@ -5,6 +5,7 @@
   inputs,
   outputs,
   pkgs,
+  orange_config,
   solar_config,
   ...
 }:
@@ -78,13 +79,11 @@
     supportedFilesystems = [ "btrfs" ];
     initrd.kernelModules = [ "amdgpu" ];
 
-    # TODO: Make encryption more convenient to configure
+    # NOTE: If no encryption is used this block should be removed
     # Unlock encrypted root device
     initrd.luks.devices = {
       root = {
-        # ATTENTION! Set this to the UUID of the partition
-        # that contains the encrypted LUKS root
-        device = "/dev/disk/by-uuid/<root-uuid>";
+        device = "/dev/disk/by-uuid/${orange_config.hardware.cryptroot_uuid}";
         preLVM = true;
         allowDiscards = true;  # SSD optimizations
       };
@@ -107,18 +106,18 @@
         rocmPackages.clr            # AMD Common Language Runtime
       ];
       extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
+        driversi686Linux.amdvlk     # 32-bit support
       ];
     };
   };
 
   # Set time zone
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = orange_config.system.timezone;
   # Select internationalization properties
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = orange_config.system.default_locale;
     extraLocaleSettings = let
-      locale = "ru_RU.UTF-8";
+      locale = orange_config.system.additional_locale;
     in {
       LC_ADDRESS = locale;
       LC_IDENTIFICATION = locale;
@@ -134,7 +133,7 @@
 
   # Configure networking
   networking = {
-    hostName = "orange-desktop";
+    hostName = orange_config.system.hostname;
     networkmanager.enable = true;
     nftables.enable = true;
     firewall.enable = true;
@@ -158,7 +157,6 @@
   # List system-wide packages
   environment.systemPackages = with pkgs; [
     pciutils                        # Tools for inspecting PCI device configs
-    ffmpeg                          # A solution to manipulate audio and video
     wget                            # Tool for retrieving remote files
     curl                            # Tool for transferring files with URL syntax
     git                             # Distributed version control system
