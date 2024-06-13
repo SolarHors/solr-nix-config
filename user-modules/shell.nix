@@ -14,12 +14,33 @@ in {
   # Configure the Z shell
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     shellAliases = aliases;
-    # Make use of the Powerlevel10k theme
-    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
+
+    # Use the Powerlevel10k theme
+    # It will start the configuration and place the
+    # results in `~/.p10k.zsh`
+    #initExtra = "source ~/.p10k.zsh || source ~/.zsh/plugins/powerlevel10k/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    initExtra = "source ~/.p10k.zsh || source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+
+    # Use p10k instant prompt
+    # It shows the prompt upon zsh startup while
+    # plugins are still loading
+    initExtraFirst = ''
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi
+    '';
   };
 
   # Configure the Bourne-Again Shell
