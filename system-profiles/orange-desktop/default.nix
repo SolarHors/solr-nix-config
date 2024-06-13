@@ -29,7 +29,7 @@
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
     }.${solar_config.user.desktop}
 
-    # Enable sound
+    # Enable sound and XDG portals
     ../../system-modules/pipewire.nix
 
     # Enable Open Tablet Driver
@@ -40,6 +40,9 @@
 
     # Configure network shares
     ../../system-modules/netshare.nix
+
+    # Enable Steam gaming
+    ../../system-modules/games.nix
 
     # Enable virtualization
     ../../system-modules/virtualization.nix
