@@ -11,6 +11,9 @@
     stylix.nixosModules.stylix
   ];
 
+  # Enable Stylix
+  stylix.enable = true;
+
   # Set the wallpaper
   stylix.image = pkgs.fetchurl {
     url = personal_config.theme.bg_url;
