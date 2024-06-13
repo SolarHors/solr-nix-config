@@ -40,6 +40,9 @@
     # Configure network shares
     ../../system-modules/netshare.nix
 
+    # Enable virtualization
+    ../../system-modules/virtualization.nix
+
     # Theme system applications
     ../../system-modules/stylix.nix
   ];
