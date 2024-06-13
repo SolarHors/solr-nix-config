@@ -3,5 +3,5 @@
 # Use the command below to generate one (make sure your drives are
 # formatted and mounted)
 #
-# nixos-generate-config --show-hardware-config > ./user-profiles/<profile_name>/hardware-configuration.nix
+# nixos-generate-config --show-hardware-config > ./system-profiles/<profile_name>/hardware-configuration.nix
 #
