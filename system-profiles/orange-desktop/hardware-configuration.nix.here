@@ -1,7 +1,0 @@
-#
-# Place your generated `hardware-configuration.nix` file in this folder
-# Use the command below to generate one (make sure your drives are
-# formatted and mounted)
-#
-# nixos-generate-config --show-hardware-config > ./system-profiles/<profile_name>/hardware-configuration.nix
-#
