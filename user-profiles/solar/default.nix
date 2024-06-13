@@ -20,9 +20,6 @@
     # Configure user shell and console-line tools
     ../../user-modules/shell.nix
 
-    # Enable gaming configurations
-    ../../user-modules/games.nix
-
     # Install VSCodium
     ../../user-modules/vscodium.nix
   ];
@@ -54,6 +51,7 @@
     onlyoffice-bin           # Office suite
     (lowPrio localsend)      # Local file sharing between devices
     pika-backup              # Backup utility based on borg
+    ffmpeg                   # A solution to manipulate audio and video
     mpv                      # Media player
     papirus-icon-theme       # Papirus icon theme
     tealdeer                 # Simplified and community-driven man pages
