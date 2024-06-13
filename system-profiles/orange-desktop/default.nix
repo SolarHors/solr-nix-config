@@ -93,6 +93,8 @@
 
   # Hardware configuration for AMD
   hardware = {
+    # Update the CPU microcode
+    cpu.amd.updateMicrocode = true;
     opengl = {
       # Enable OpenGL
       enable = true;
