@@ -5,7 +5,7 @@
   inputs,
   outputs,
   pkgs,
-  personal_config,
+  solar_config,
   ...
 }:
 
@@ -26,7 +26,7 @@
     {
       "plasma" = ../../system-modules/desktop/plasma.nix;
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
-    }.${personal_config.user.desktop}
+    }.${solar_config.user.desktop}
 
     # Enable sound
     ../../system-modules/pipewire.nix
@@ -52,12 +52,12 @@
     extraSpecialArgs = {
       inherit inputs outputs;
       # Profile TOML configuration settings
-      inherit personal_config;
+      inherit solar_config;
     };
     # Overwrite config after backing it up
     backupFileExtension = "backup";
     # Import home-manager configurations for users
-    users.${personal_config.user.username} = import ../../user-profiles/personal;
+    users.${solar_config.user.username} = import ../../user-profiles/solar;
   };
 
   nix = {
@@ -146,8 +146,8 @@
   };
 
   # Configure system-wide user settings
-  users.users.${personal_config.user.username} = {
-    description = personal_config.user.description;
+  users.users.${solar_config.user.username} = {
+    description = solar_config.user.description;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
   };

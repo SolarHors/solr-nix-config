@@ -5,7 +5,7 @@
   lib,
   config,
   pkgs,
-  personal_config,
+  solar_config,
   ...
 }:
 
@@ -15,7 +15,7 @@
     {
       "plasma" = ../../user-modules/desktop/plasma.nix;
       "hyprland" = ../../user-modules/desktop/hyprland.nix;
-    }.${personal_config.user.desktop}
+    }.${solar_config.user.desktop}
 
     # Configure user shell and console-line tools
     ../../user-modules/shell.nix
@@ -29,8 +29,8 @@
 
   # Set username and homedir
   home = {
-    username = personal_config.user.username;
-    homeDirectory = "/home/" + personal_config.user.username;
+    username = solar_config.user.username;
+    homeDirectory = "/home/" + solar_config.user.username;
   };
 
   # Let Home Manager install and manage itself
@@ -58,6 +58,9 @@
     papirus-icon-theme       # Papirus icon theme
     tealdeer                 # Simplified and community-driven man pages
     yt-dlp                   # Tool to download videos from YouTube
+    gamescope                # Micro-compositor tailored towards gaming
+    mangohud                 # Overlay for monitoring game statistics
+    bottles                  # An easy-to-use wineprefix manager
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

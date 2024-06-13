@@ -48,8 +48,10 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    # TOML configuration for the personal profile
-    personal_config = (builtins.fromTOML (builtins.readFile ./user-profiles/personal/config.toml));
+    # TOML configuration for the system profile of `orange-desktop`
+    #orange_config = (builtins.fromTOML (builtins.readFile ./system-profiles/orange-desktop/config.toml));
+    # TOML configuration for the user profile of `solar`
+    solar_config = (builtins.fromTOML (builtins.readFile ./user-profiles/solar/config.toml));
   in {
     # NixOS system configuration entrypoint
     # Available through `nixos-rebuild --flake .#HOSTNAME`
@@ -61,7 +63,7 @@
           # Style system-wide applications
           inherit (inputs) stylix;
           # Profile TOML configuration settings
-          inherit personal_config;
+          inherit solar_config;
         };
         # System configuration
         modules = [ ./system-profiles/orange-desktop ];
@@ -80,9 +82,11 @@
           inherit inputs outputs;
           # Style user-wide applications
           inherit (inputs) stylix;
+          # Profile TOML configuration settings
+          inherit solar_config;
         };
         # User configuration
-        modules = [ ./user-profiles/personal ];
+        modules = [ ./user-profiles/solar ];
       };
     };
   };
