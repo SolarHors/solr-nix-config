@@ -5,7 +5,7 @@
 {
   programs = {
     steam = {
-      # Enable Steam
+      # Enable Steam digital distribution platform
       enable = true;
       # Open ports in the firewall for Steam Remote Play
       remotePlay.openFirewall = true;
@@ -16,10 +16,4 @@
     # Enable Gamescope microcompositor
     gamescope.enable = true;
   };
-
-  home.packages = with pkgs; [
-    gamescope    # Micro-compositor tailored towards gaming
-    mangohud     # Overlay for monitoring game statistics
-    bottles      # An easy-to-use wineprefix manager
-  ];
 }
