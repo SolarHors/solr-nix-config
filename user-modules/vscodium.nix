@@ -7,6 +7,8 @@
     # Enable VSCodium
     enable = true;
     package = pkgs.vscodium;
+    # Do not notify for updates
+    enableExtensionUpdateCheck = false;
     # Install extensions by their ID
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide            # Nix support
