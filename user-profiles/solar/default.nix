@@ -36,6 +36,9 @@
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
+  # Allow unfree software with home-manager
+  nixpkgs.config.allowUnfree = true;
+
   # Install user packages
   home.packages = with pkgs; [
     alacritty                # GPU-accelerated terminal emulator
