@@ -6,6 +6,22 @@
 { config, pkgs, ... }:
 
 {
-  # Theme most user programs
-  stylix.autoEnable = true;
+  stylix = {
+    # Theme most user programs
+    autoEnable = true;
+
+    # Explicitly theme programs
+    # targets = {
+    #   alacritty.enable = true;
+    #   bat.enable = true;
+    #   firefox.enable = true;
+    #   helix.enable = true;
+    #   mangohud.enable = true;
+    #   vscode.enable = true;
+    #   fzf.enable = true;
+    #   gtk.enable = true;
+    #   hyprland.enable = true;
+    #   kde.enable = true;
+    # };
+  };
 }

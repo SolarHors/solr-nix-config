@@ -25,6 +25,9 @@
 
     # Install VSCodium
     ../../user-modules/vscodium.nix
+
+    # Theme user applications
+    ../../user-modules/stylix.nix
   ];
 
   # Set username and homedir
