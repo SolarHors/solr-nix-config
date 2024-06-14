@@ -42,7 +42,7 @@
     ../../system-modules/netshare.nix
 
     # Enable Steam gaming
-    ../../system-modules/games.nix
+    #../../system-modules/games.nix
 
     # Enable virtualization
     ../../system-modules/virtualization.nix

@@ -20,6 +20,9 @@
     # Configure user shell and console-line tools
     ../../user-modules/shell.nix
 
+    # Add gaming configuration with Steam
+    ../../user-modules/games.nix
+
     # Install VSCodium
     ../../user-modules/vscodium.nix
   ];
