@@ -26,6 +26,9 @@
     # Install VSCodium
     ../../user-modules/vscodium.nix
 
+    # Configure Librewolf
+    ../../user-modules/firefox.nix
+
     # Theme user applications
     ../../user-modules/stylix.nix
   ];
