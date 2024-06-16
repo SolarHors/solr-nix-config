@@ -76,20 +76,20 @@
     # Available through `home-manager --flake .#USERNAME@HOSTNAME`
     # NOTE: orange-desktop uses home-manager as a module,
     # meaning user-wide configuration is applied during rebuild
-    homeConfigurations = {
-      "solar@orange-desktop" = home-manager.lib.homeManagerConfiguration {
-        # Home-manager requires `pkgs` instance
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          # Style user-wide applications
-          inherit (inputs) stylix;
-          # User profile TOML configuration settings
-          inherit solar_config;
-        };
-        # User configuration
-        modules = [ ./user-profiles/solar ];
-      };
-    };
+    # homeConfigurations = {
+    #   "solar@orange-desktop" = home-manager.lib.homeManagerConfiguration {
+    #     # Home-manager requires `pkgs` instance
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #     extraSpecialArgs = {
+    #       inherit inputs outputs;
+    #       # Style user-wide applications
+    #       inherit (inputs) stylix;
+    #       # User profile TOML configuration settings
+    #       inherit solar_config;
+    #     };
+    #     # User configuration
+    #     modules = [ ./user-profiles/solar ];
+    #   };
+    # };
   };
 }

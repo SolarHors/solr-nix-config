@@ -60,17 +60,19 @@
     };
     # Overwrite config after backing it up
     backupFileExtension = "backup";
+    # Use the system configuration’s pkgs argument
+    useGlobalPkgs = true;
     # Import home-manager configurations for users
     users.${solar_config.user.username} = import ../../user-profiles/solar;
   };
 
-  nix = {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-    };
+  nix.settings = {
+    # Enable flakes and new 'nix' command
+    experimental-features = "nix-command flakes";
+    # Deduplicate and optimize nix store
+    auto-optimise-store = true;
+    # Users allowed to connect to the Nix daemon
+    allowed-users = [ "@wheel" ];
   };
 
   # Configure boot options
@@ -81,6 +83,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "btrfs" ];
     initrd.kernelModules = [ "amdgpu" ];
+    initrd.systemd.dbus.enable = true;
 
     # NOTE: If no encryption is used this block should be removed
     # Unlock encrypted root device
