@@ -20,6 +20,7 @@ This is my personal NixOS and Home Manager configuration using [flakes](https://
 - [ ] Custom SDDM theme in Hyprland
 - [ ] Leave only necessary imports in derivations
 - [ ] TOML configuration for basic system profile features (like encryption, vpn)
+- [ ] Add monitor configuration
 - [ ] ~~Write a GNOME config (for completeness' sake)~~
 - [ ] ~~Set stylix.targets.gnome.enable in GNOME config~~
 - [x] TOML configuration for basic user profile features

@@ -31,9 +31,6 @@
       #   darkreader
       # ]
 
-      # Set the default search engine
-      search.default = "DuckDuckGo";
-
       # Force replace the existing containers configuration
       containersForce = true;
 
