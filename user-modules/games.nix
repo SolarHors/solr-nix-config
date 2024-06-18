@@ -8,6 +8,7 @@
     mangohud          # Overlay for monitoring game statistics
     bottles           # An easy-to-use wineprefix manager
     steam             # Digital distribution platform
+    prismlauncher     # Launcher for Minecraft
     # Compatibility packages (probably) required by Steam
     libpulseaudio
     xorg.libXcursor
