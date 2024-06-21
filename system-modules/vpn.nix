@@ -26,8 +26,8 @@ let
   # [Peer] > AllowedIPs
   allowed_ips = [ "0.0.0.0/0" "::/0" ];
   # [Peer] > Endpoint
-  endpoint_ip = "185.204.1.211";
-  endpoint_port = "51820";
+  endpoint_ip = "185.77.218.84";
+  endpoint_port = 51820;  # has to be an integer
 in {
   # Open ports
   networking.firewall = {
@@ -56,7 +56,7 @@ in {
           # Forward all the traffic via VPN
           allowedIPs = allowed_ips;
           # Server IP and port
-          endpoint = "${endpoint_ip}:${endpoint_port}";
+          endpoint = "${endpoint_ip}:${toString endpoint_port}";
           # Send keepalives every 25 seconds, it is
           # mportant to keep NAT tables alive
           persistentKeepalive = 25;
