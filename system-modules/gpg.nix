@@ -9,5 +9,5 @@
 
   environment.systemPackages = with pkgs; [
     gnupg    # Modern release of GnuPG
-  ]
+  ];
 }

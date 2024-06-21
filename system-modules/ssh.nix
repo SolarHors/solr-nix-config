@@ -12,11 +12,11 @@
     };
   };
 
-  # Enable GnuPG support
-  if programs.gnupg.agent.enable
-  then programs.gnupg.agent.enableSSHSupport = true;
+  # Enable GnuPG support if GnuPG is enabled
+  programs.gnupg.agent.enableSSHSupport = 
+    config.programs.gnupg.agent.enable;
 
   environment.systemPackages = with pkgs; [
     openssh    # An implementation of the SSH protocol
-  ]
+  ];
 }
