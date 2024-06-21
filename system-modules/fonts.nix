@@ -16,6 +16,10 @@
     # Fira Code: https://github.com/tonsky/FiraCode
     fira-code
     # Nerdfonts: https://www.nerdfonts.com/
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode" "FiraMono" "Iosevka" "IosevkaTerm"
+      ];
+    })
   ];
 }
