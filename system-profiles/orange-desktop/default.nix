@@ -41,8 +41,8 @@
     # Configure network shares
     ../../system-modules/netshare.nix
 
-    # Enable Steam gaming
-    #../../system-modules/games.nix
+    # Enable Wireguard VPN
+    ../../system-modules/vpn.nix
 
     # Enable virtualization
     ../../system-modules/virtualization.nix
