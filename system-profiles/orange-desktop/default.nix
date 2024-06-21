@@ -32,6 +32,10 @@
     # Enable sound and XDG portals
     ../../system-modules/pipewire.nix
 
+    # Enable SSH and GnuPG
+    ../../system-modules/ssh.nix
+    ../../system-modules/gpg.nix
+
     # Enable Open Tablet Driver
     ../../system-modules/otd.nix
 
