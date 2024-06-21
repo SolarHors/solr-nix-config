@@ -47,7 +47,9 @@
 
   # Install user packages
   home.packages = with pkgs; [
-    alacritty                # GPU-accelerated terminal emulator
+    #alacritty                # GPU-accelerated terminal emulator
+    #foot                     # Minimalistic Wayland terminal emulator
+    kitty                    # Hackable, featureful, OpenGL based terminal emulator
     librewolf                # Firefox fork, focused on privacy and security
     tor-browser              # Hardened browser utilizing the Tor network
     thunderbird              # Fully-featured E-mail client
@@ -68,9 +70,6 @@
     papirus-icon-theme       # Papirus icon theme
     tealdeer                 # Simplified and community-driven man pages
     yt-dlp                   # Tool to download videos from YouTube
-    gamescope                # Micro-compositor tailored towards gaming
-    mangohud                 # Overlay for monitoring game statistics
-    bottles                  # An easy-to-use wineprefix manager
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
