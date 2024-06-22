@@ -11,17 +11,17 @@
     autoEnable = true;
 
     # Explicitly theme programs
-    # targets = {
-    #   alacritty.enable = true;
-    #   bat.enable = true;
-    #   firefox.enable = true;
-    #   helix.enable = true;
-    #   mangohud.enable = true;
-    #   vscode.enable = true;
-    #   fzf.enable = true;
-    #   gtk.enable = true;
-    #   hyprland.enable = true;
-    #   kde.enable = true;
-    # };
+    targets = {
+      kitty.enable = true;
+      bat.enable = true;
+      firefox.enable = true;
+      helix.enable = true;
+      mangohud.enable = true;
+      vscode.enable = true;
+      fzf.enable = true;
+      gtk.enable = true;
+      hyprland.enable = true;
+      kde.enable = true;
+    };
   };
 }
