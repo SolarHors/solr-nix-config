@@ -23,8 +23,11 @@
     # Add gaming configuration with Steam
     ../../user-modules/games.nix
 
-    # Install VSCodium
+    # Configure VSCodium
     ../../user-modules/vscodium.nix
+
+    # Configure Kitty terminal emulator
+    ../../user-modules/kitty.nix
 
     # Configure Librewolf
     ../../user-modules/firefox.nix
@@ -49,8 +52,8 @@
   home.packages = with pkgs; [
     #alacritty                # GPU-accelerated terminal emulator
     #foot                     # Minimalistic Wayland terminal emulator
-    kitty                    # Hackable, featureful, OpenGL based terminal emulator
-    librewolf                # Firefox fork, focused on privacy and security
+    #kitty                    # Hackable, featureful, OpenGL based terminal emulator
+    #librewolf                # Firefox fork, focused on privacy and security
     tor-browser              # Hardened browser utilizing the Tor network
     thunderbird              # Fully-featured E-mail client
     telegram-desktop         # Telegram Desktop messaging app
