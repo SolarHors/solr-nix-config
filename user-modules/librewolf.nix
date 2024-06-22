@@ -46,7 +46,7 @@
           icon = "circle";
           id = 2;
         };
-        mastodon = {
+        activitypub = {
           color = "purple";
           icon = "circle";
           id = 3;
@@ -66,7 +66,7 @@
           icon = "circle";
           id = 6;
         };
-        github = {
+        git = {
           color = "yellow";
           icon = "circle";
           id = 7;
