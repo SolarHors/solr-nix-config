@@ -6,7 +6,7 @@ let
   # Set aliases for command-line applications
   aliases = {
     ls = "eza --icons -l -T -L=1";
-    cat = "bat";
+    cat = "bat --plain";
     top = "btm";
     ps = "procs";
   };
@@ -58,6 +58,7 @@ in {
     procs    # A modern replacement for ps
     ripgrep  # A line-oriented search tool
     fd       # A program to find entries in your filesystem
+    fzf      # A command-line fuzzy finder
     # Theme for zsh
     zsh-powerlevel10k
   ];
