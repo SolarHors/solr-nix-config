@@ -57,6 +57,6 @@
     sizes.applications = 10;
     sizes.desktop = 10;
     sizes.popups = 10;
-    sizes.terminal = 10;
+    sizes.terminal = 11;
   };
 }
