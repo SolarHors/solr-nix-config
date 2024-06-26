@@ -3,6 +3,8 @@
 # Profile and policy settings selected with ffprofile
 # https://github.com/allo-/ffprofile
 
+# TODO: Implement Arkenfox configuration
+
 { config, pkgs, ... }:
 
 {
@@ -10,8 +12,9 @@
     enable = true;
 
     # Group policies to install
+    # https://mozilla.github.io/policy-templates/
     policies = {
-      # Sane defaults for privacy
+      # Sane defaults
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
@@ -21,10 +24,11 @@
       CaptivePortal = false;
 
       DontCheckDefaultBrowser = true;
-      NewTabPage = false;
+      NewTabPage = true;
       SearchBar = "unified";
 
       Preferences = let
+        true_default = { Value = true; Status = "default"; };
         false_locked = { Value = false; Status = "locked"; };
         nullstr_locked = { Value = ""; Status = "locked"; };
       in {
@@ -34,6 +38,9 @@
         "browser.newtabpage.activity-stream.showSponsored" = false_locked;
         "browser.newtabpage.activity-stream.system.showSponsored" = false_locked;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false_locked;
+        "browser.newtabpage.activity-stream.default.sites" = nullstr_locked;
+        "privacy.userContext.enabled" = true_default;
+        "privacy.userContext.ui.enabled" = true_default;
       };
 
       # List installed extensions for all profiles
@@ -71,6 +78,7 @@
       # TODO: Load bookmarks from sops-encrypted json backup
       # Load the bookmarks
       #bookmarks = (builtins.fromJSON (builtins.readFile ./main-bookmarks.json));
+      bookmarks = {};
 
       # Install extensions per profile from Nix User Repositories (NUR)
       # https://nur.nix-community.org/
@@ -84,10 +92,20 @@
       # ]
 
       # Set default search engine
-      search.default = "DuckDuckGo";
+      search = {
+        force = true;
+        default = "DuckDuckGo";
+        privateDefault = "DuckDuckGo";
+        order = [ "DuckDuckGo" ];
+        engines = {
+          "Google".metaData.hidden = true;
+          "Bing".metaData.hidden = true;
+        };
+      };
 
       # Configure profile settings
       settings = {
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
         "app.normandy.api_url" = "";
         "app.normandy.enabled" = false;
         "app.shield.optoutstudies.enabled" = false;
@@ -95,6 +113,7 @@
         "beacon.enabled" = false;
         "breakpad.reportURL" = "";
         "browser.aboutConfig.showWarning" = false;
+        "browser.cache.disk.enable" = false;
         "browser.cache.offline.enable" = false;
         "browser.crashReports.unsubmittedCheck.autoSubmit" = false;
         "browser.crashReports.unsubmittedCheck.autoSubmit2" = false;
@@ -255,6 +274,7 @@
 
       # Load the bookmarks
       #bookmarks = (builtins.fromJSON (builtins.readFile ./container-bookmarks.json));
+      bookmarks = {};
 
       # Set default search engine
       search.default = "DuckDuckGo";
