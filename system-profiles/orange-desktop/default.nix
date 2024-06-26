@@ -89,15 +89,17 @@
     initrd.kernelModules = [ "amdgpu" ];
     initrd.systemd.dbus.enable = true;
 
-    # NOTE: If no encryption is used this block should be removed
-    # Unlock encrypted root device
-    initrd.luks.devices = {
-      root = {
-        device = "/dev/disk/by-uuid/${orange_config.hardware.cryptroot_uuid}";
-        preLVM = true;
-        allowDiscards = true;  # SSD optimizations
+    # Unlock encrypted root device (if present)
+    initrd.luks.devices = 
+      if orange_config.hardware.cryptroot_uuid == ""
+      then {}
+      else {
+        root = {
+          device = "/dev/disk/by-uuid/${orange_config.hardware.cryptroot_uuid}";
+          preLVM = true;
+          allowDiscards = true;  # SSD optimizations
+        };
       };
-    };
   };
 
   # Hardware configuration for AMD

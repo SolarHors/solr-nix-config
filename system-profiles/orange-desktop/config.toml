@@ -5,6 +5,7 @@
 
 [hardware]
 # UUID of the partition that contains the encrypted LUKS root
+# Leave empty if no encryption is used
 cryptroot_uuid = "f352f3cb-534a-4c8f-9d6a-8663a3551707"
 
 [system]
