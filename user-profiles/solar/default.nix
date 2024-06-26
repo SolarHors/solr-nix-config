@@ -30,7 +30,7 @@
     ../../user-modules/kitty.nix
 
     # Configure Librewolf
-    ../../user-modules/firefox.nix
+    ../../user-modules/librewolf.nix
 
     # Theme user applications
     ../../user-modules/stylix.nix
