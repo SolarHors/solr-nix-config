@@ -1,7 +1,7 @@
 # KDE Plasma desktop environment system configuration
 # (https://kde.org/plasma-desktop/)
 
-{ config, pkgs, ... }:
+{ config, pkgs, orange_config, solar_config, ... }:
 
 {
   imports = [
@@ -29,8 +29,12 @@
         # Enable experimental Wayland support
         wayland.enable = true;
       };
-      # Select Plasma-Wayland session by default
-      #defaultSession = "plasmawayland";
+      # Autologin user if drive encryption is enabled
+      autoLogin.enable = 
+        if orange_config.hardware.cryptroot_uuid == ""
+        then false
+        else true;
+      autoLogin.user = solar_config.user.username;
     };
   };
 
