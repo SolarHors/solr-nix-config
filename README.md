@@ -17,12 +17,13 @@ This is my personal NixOS and Home Manager configuration using [flakes](https://
 - [ ] Possibly remove Stylix from specialArgs and use inputs
 - [ ] Nvim configuration
 - [ ] Presentable Hyprland configuration
-- [ ] Custom SDDM theme in Hyprland
 - [ ] Leave only necessary imports in derivations
-- [ ] TOML configuration for basic system profile features (like encryption, vpn)
 - [ ] Add monitor configuration
+- [ ] Separate system and user configurations
+- [ ] ~~Custom SDDM theme in Hyprland~~
 - [ ] ~~Write a GNOME config (for completeness' sake)~~
 - [ ] ~~Set stylix.targets.gnome.enable in GNOME config~~
+- [x] TOML configuration for basic system profile features (like encryption, vpn)
 - [x] TOML configuration for basic user profile features
 - [x] Uniform system styling using [Stylix](https://github.com/danth/stylix)
 - [x] Minimal usable configuration for KDE Plasma
