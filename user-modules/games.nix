@@ -15,5 +15,7 @@
     xorg.libXi
     xorg.libXinerama
     xorg.libXScrnSaver
+    # Java 17 is required by some minecraft versions
+    jdk17
   ];
 }
