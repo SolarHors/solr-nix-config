@@ -31,6 +31,9 @@
   # TODO: Allow deriving from wallpaper by leaving value empty
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/" + solar_config.theme.colors + ".yaml";
 
+  # Apply color scheme overrides
+  stylix.override = solar_config.theme.overrides;
+
   # Set default fonts
   stylix.fonts = {
     serif = {
