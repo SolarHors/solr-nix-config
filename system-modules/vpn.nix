@@ -10,12 +10,15 @@
 # from the downloaded Mullvad config file into a
 # separate file, placed at `/etc/mullvad-vpn.key`
 # Make file readable only by root:
-# sudo chmod 400 /etc/aaa-bbb-wg-000.toml
+# sudo chmod 400 /etc/mullvad-vpn.key
 
 # Check the guide above for killswitch setup instructions
 
+# To enable/disable VPN, start/stop `wg-quick-wg0.service`
+
 let
   # Path to the private key file
+  # TODO: Move to system configuration
   private_key_file = "/etc/mullvad-vpn.key";
   # [Interface] > Address
   address = [ "10.71.161.56/32" "fc00:bbbb:bbbb:bb01::8:a137/128" ];
