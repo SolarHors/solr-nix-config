@@ -5,19 +5,20 @@
   inputs,
   outputs,
   pkgs,
-  personal_config,
+  orange_config,
+  solar_config,
   ...
 }:
 
 {
   imports = [
+    # Import the generated hardware configuration
+    ./hardware-configuration.nix
+
     # Use profiles from nixos-hardware for optimal settings
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-gpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
-
-    # Import the generated hardware configuration
-    ./hardware-configuration.nix
 
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
@@ -26,7 +27,29 @@
     {
       "plasma" = ../../system-modules/desktop/plasma.nix;
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
-    }.${personal_config.user.desktop}
+    }.${solar_config.user.desktop}
+
+    # Enable sound and XDG portals
+    ../../system-modules/pipewire.nix
+
+    # Enable SSH and GnuPG
+    ../../system-modules/ssh.nix
+    ../../system-modules/gpg.nix
+
+    # Enable Open Tablet Driver
+    ../../system-modules/otd.nix
+
+    # Install font packages
+    ../../system-modules/fonts.nix
+
+    # Configure network shares
+    ../../system-modules/netshare.nix
+
+    # Enable Wireguard VPN
+    ../../system-modules/vpn.nix
+
+    # Enable virtualization
+    ../../system-modules/virtualization.nix
 
     # Theme system applications
     ../../system-modules/stylix.nix
@@ -37,19 +60,23 @@
     extraSpecialArgs = {
       inherit inputs outputs;
       # Profile TOML configuration settings
-      inherit personal_config;
+      inherit solar_config;
     };
+    # Overwrite config after backing it up
+    backupFileExtension = "backup";
+    # Use the system configuration’s pkgs argument
+    useGlobalPkgs = true;
     # Import home-manager configurations for users
-    users.${personal_config.user.username} = import ../../user-profiles/personal;
+    users.${solar_config.user.username} = import ../../user-profiles/solar;
   };
 
-  nix = {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-    };
+  nix.settings = {
+    # Enable flakes and new 'nix' command
+    experimental-features = "nix-command flakes";
+    # Deduplicate and optimize nix store
+    auto-optimise-store = true;
+    # Users allowed to connect to the Nix daemon
+    allowed-users = [ "@wheel" ];
   };
 
   # Configure boot options
@@ -58,11 +85,27 @@
     loader.systemd-boot.configurationLimit = 5;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    initrd.kernelModules = ["amdgpu"];
+    supportedFilesystems = [ "btrfs" ];
+    initrd.kernelModules = [ "amdgpu" ];
+    initrd.systemd.dbus.enable = true;
+
+    # Unlock encrypted root device (if present)
+    initrd.luks.devices = 
+      if orange_config.hardware.cryptroot_uuid == ""
+      then {}
+      else {
+        root = {
+          device = "/dev/disk/by-uuid/${orange_config.hardware.cryptroot_uuid}";
+          preLVM = true;
+          allowDiscards = true;  # SSD optimizations
+        };
+      };
   };
 
   # Hardware configuration for AMD
   hardware = {
+    # Update the CPU microcode
+    cpu.amd.updateMicrocode = true;
     opengl = {
       # Enable OpenGL
       enable = true;
@@ -75,18 +118,18 @@
         rocmPackages.clr            # AMD Common Language Runtime
       ];
       extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
+        driversi686Linux.amdvlk     # 32-bit support
       ];
     };
   };
 
   # Set time zone
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = orange_config.system.timezone;
   # Select internationalization properties
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = orange_config.system.default_locale;
     extraLocaleSettings = let
-      locale = "ru_RU.UTF-8";
+      locale = orange_config.system.additional_locale;
     in {
       LC_ADDRESS = locale;
       LC_IDENTIFICATION = locale;
@@ -102,13 +145,20 @@
 
   # Configure networking
   networking = {
-    hostName = "orange-desktop";
+    hostName = orange_config.system.hostname;
     networkmanager.enable = true;
+    nftables.enable = true;
+    firewall.enable = true;
+    nat.enable = true;
+
+    hosts = {
+      "127.0.0.1" = ["localhost"];
+    };
   };
 
   # Configure system-wide user settings
-  users.users.${personal_config.user.username} = {
-    description = personal_config.user.description;
+  users.users.${solar_config.user.username} = {
+    description = solar_config.user.description;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
   };
@@ -119,10 +169,11 @@
   # List system-wide packages
   environment.systemPackages = with pkgs; [
     pciutils                        # Tools for inspecting PCI device configs
-    ffmpeg                          # A solution to manipulate audio and video
     wget                            # Tool for retrieving remote files
+    curl                            # Tool for transferring files with URL syntax
+    git                             # Distributed version control system
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

@@ -11,7 +11,7 @@ description = "Solar Flare"
 # Email address for security configuration
 email = "orange.hors@proton.me"
 # Selected desktop environment / window manager
-desktop = "hyprland"  # Either "hyprland", "plasma" or "gnome"
+desktop = "plasma"  # Either "hyprland" or "plasma"
 
 # Theme settings are used both in system and user Stylix configurations
 [theme]
@@ -19,12 +19,17 @@ desktop = "hyprland"  # Either "hyprland", "plasma" or "gnome"
 # https://github.com/tinted-theming/base16-schemes
 # Previews are avaliable at
 # https://tinted-theming.github.io/base16-gallery
-colors = "horizon-dark"
+colors = "shadesmear-dark"
 # Whether to use a dark or light theme
 # Leave empty to select based on the background picture
 polarity = "dark"
 # Background picture URL
-bg_url = "https://derpicdn.net/img/view/2022/3/18/2827797.png"
+bg_url = "https://derpicdn.net/img/view/2024/6/27/3390990.png"
 # Background picture SHA256 (required for bg_url)
-bg_sha256 = "f963377fed86229921974be942c8c4c85a8101e3e75664720bfb5a0fdd1a545c"
+bg_sha256 = "9aa1c501a365fba341e502310d334f679c21f53eda2e119bd93d77d7b9c8e5f4"
 
+# Overrides for the theme colors - leave empty for defaults
+# View base16 color references at:
+# https://github.com/chriskempson/base16/blob/main/styling.md
+[theme.overrides]
+base03 = "8a8a8a"

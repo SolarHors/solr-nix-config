@@ -10,16 +10,23 @@ This is my personal NixOS and Home Manager configuration using [flakes](https://
 
 ## TODO
 
-- [ ] Figure out how Cachix works (Hyprland)
-- [ ] Write a GNOME config (for completeness' sake)
-- [ ] Set stylix.targets.gnome.enable in GNOME config
+- [ ] Figure out how Cachix for Hyprland works or remove it
+- [ ] Declarative flatpak configuration (focusing on user applications)
 - [ ] Use adw-gtk3 for GTK3 apps
 - [ ] Move libvirtd user group assignment into virt.nix
 - [ ] Possibly remove Stylix from specialArgs and use inputs
-- [ ] Custom SDDM theme in Hyprland
+- [ ] Nvim configuration
+- [ ] Presentable Hyprland configuration
 - [ ] Leave only necessary imports in derivations
+- [ ] Add monitor configuration
+- [ ] Separate system and user configurations
+- [ ] ~~Custom SDDM theme in Hyprland~~
+- [ ] ~~Write a GNOME config (for completeness' sake)~~
+- [ ] ~~Set stylix.targets.gnome.enable in GNOME config~~
+- [x] TOML configuration for basic system profile features (like encryption, vpn)
 - [x] TOML configuration for basic user profile features
 - [x] Uniform system styling using [Stylix](https://github.com/danth/stylix)
+- [x] Minimal usable configuration for KDE Plasma
 
 ## Structure
 

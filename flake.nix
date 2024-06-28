@@ -25,7 +25,9 @@
 
     # Hyprland window manager
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,8 +48,10 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    # TOML configuration for the personal profile
-    personal_config = (builtins.fromTOML (builtins.readFile ./user-profiles/personal/config.toml));
+    # TOML configuration for the system profile of `orange-desktop`
+    orange_config = (builtins.fromTOML (builtins.readFile ./system-profiles/orange-desktop/config.toml));
+    # TOML configuration for the user profile of `solar`
+    solar_config = (builtins.fromTOML (builtins.readFile ./user-profiles/solar/config.toml));
   in {
     # NixOS system configuration entrypoint
     # Available through `nixos-rebuild --flake .#HOSTNAME`
@@ -58,8 +62,10 @@
           inherit inputs outputs;
           # Style system-wide applications
           inherit (inputs) stylix;
-          # Profile TOML configuration settings
-          inherit personal_config;
+          # System profile TOML configuration settings
+          inherit orange_config;
+          # User profile TOML configuration settings
+          inherit solar_config;
         };
         # System configuration
         modules = [ ./system-profiles/orange-desktop ];
@@ -70,18 +76,20 @@
     # Available through `home-manager --flake .#USERNAME@HOSTNAME`
     # NOTE: orange-desktop uses home-manager as a module,
     # meaning user-wide configuration is applied during rebuild
-    homeConfigurations = {
-      "solar@orange-desktop" = home-manager.lib.homeManagerConfiguration {
-        # Home-manager requires `pkgs` instance
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          # Style user-wide applications
-          inherit (inputs) stylix;
-        };
-        # User configuration
-        modules = [ ./user-profiles/personal ];
-      };
-    };
+    # homeConfigurations = {
+    #   "solar@orange-desktop" = home-manager.lib.homeManagerConfiguration {
+    #     # Home-manager requires `pkgs` instance
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #     extraSpecialArgs = {
+    #       inherit inputs outputs;
+    #       # Style user-wide applications
+    #       inherit (inputs) stylix;
+    #       # User profile TOML configuration settings
+    #       inherit solar_config;
+    #     };
+    #     # User configuration
+    #     modules = [ ./user-profiles/solar ];
+    #   };
+    # };
   };
 }

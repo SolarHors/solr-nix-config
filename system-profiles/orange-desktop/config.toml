@@ -1,0 +1,19 @@
+#
+# Per-system configuration variables
+# They are read by a system profile to set up NixOS based on your hardware
+#
+
+[hardware]
+# UUID of the partition that contains the encrypted LUKS root
+# Leave empty if no encryption is used
+cryptroot_uuid = "f352f3cb-534a-4c8f-9d6a-8663a3551707"
+
+[system]
+# Name of this PC
+hostname = "orange-desktop"
+# Current timezone (see in `/etc/zoneinfo/` or `/usr/share/zoneinfo/`)
+timezone = "Europe/Moscow"
+# Default system locale (used for main app and system language)
+default_locale = "en_US.UTF-8"
+# Additional system locale (used for measurement units and other standards)
+additional_locale = "ru_RU.UTF-8"

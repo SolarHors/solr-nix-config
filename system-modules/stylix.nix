@@ -3,7 +3,7 @@
 # system Stylix configuration
 # (https://github.com/danth/stylix)
 
-{ config, pkgs, stylix, personal_config, ... }:
+{ config, pkgs, stylix, solar_config, ... }:
 
 {
   imports = [
@@ -11,33 +11,39 @@
     stylix.nixosModules.stylix
   ];
 
+  # Enable Stylix
+  stylix.enable = true;
+
   # Set the wallpaper
   stylix.image = pkgs.fetchurl {
-    url = personal_config.theme.bg_url;
-    sha256 = personal_config.theme.bg_sha256;
+    url = solar_config.theme.bg_url;
+    sha256 = solar_config.theme.bg_sha256;
   };
   
   # Use light / dark theme or either if value is not set
   stylix.polarity = let
-    theme = personal_config.theme.polarity;
+    theme = solar_config.theme.polarity;
     in if theme != "dark" && theme != "light"
       then "either"
       else theme;
   
   # Set color scheme
   # TODO: Allow deriving from wallpaper by leaving value empty
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/" + personal_config.theme.colors + ".yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/" + solar_config.theme.colors + ".yaml";
+
+  # Apply color scheme overrides
+  stylix.override = solar_config.theme.overrides;
 
   # Set default fonts
   stylix.fonts = {
     serif = {
-      package = pkgs.merriweather;
-      name = "Merriweather";
+      package = pkgs.noto-fonts;
+      name = "Noto Serif";
     };
 
     sansSerif = {
-      package = pkgs.merriweather-sans;
-      name = "Merriweather Sans";
+      package = pkgs.noto-fonts;
+      name = "Noto Sans";
     };
 
     monospace = {
@@ -49,5 +55,11 @@
       package = pkgs.noto-fonts-emoji;
       name = "Noto Color Emoji";
     };
+
+    # Set application font size
+    sizes.applications = 10;
+    sizes.desktop = 10;
+    sizes.popups = 10;
+    sizes.terminal = 11;
   };
 }
