@@ -42,6 +42,11 @@
       #   darkreader       # Dark mode for every website
       # ]
 
+      # Configure profile settings
+      settings = {
+        "general.autoScroll" = true;
+      };
+
       # Force replace the existing containers configuration
       containersForce = true;
 
@@ -100,6 +105,7 @@
 
       # Configure profile settings
       settings = {
+        "general.autoScroll" = true;
         "webgl.disabled" = false;
       };
 

@@ -170,6 +170,7 @@
         "extensions.shield-recipe-client.enabled" = false;
         "extensions.webservice.discoverURL" = "";
         "general.useragent.override" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3";
+        "general.autoScroll" = true;
         "media.autoplay.default" = 1;
         "media.autoplay.enabled" = false;
         "media.eme.enabled" = false;
@@ -287,6 +288,7 @@
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.fingerprinting.enabled" = true;
         "privacy.trackingprotection.pbmode.enabled" = true;
+        "general.autoScroll" = true;
         "webgl.disabled" = false;
       };
 
