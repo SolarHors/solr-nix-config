@@ -4,6 +4,10 @@
 { config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./common.nix
+  ];
+
   wayland.windowManager.hyprland = {
     # Enable Hyprland home-manager module
     enable = true;

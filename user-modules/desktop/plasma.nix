@@ -4,6 +4,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./common.nix
+  ];
+
   # If required, KDE Plasma can be further managed using
   # https://github.com/pjones/plasma-manager
   
