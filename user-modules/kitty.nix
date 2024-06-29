@@ -8,19 +8,19 @@
     enable = true;
 
     settings = {
-      # Manually set font
-      font_family = "Iosevka NF";
-      bold_font = "Iosevka NF Bold";
-      italic_font = "Iosevka NF Italic";
-      bold_italic_font = "Iosevka NF Bold Italic";
+      # Manually set font to Nerd Font version
+      font_family = "FiraCode Nerd Font";
+      bold_font = "FiraCode Nerd Font Bold";
+      # Activate font features
+      # https://github.com/tonsky/FiraCode/wiki/How-to-enable-stylistic-sets
+      font_features = "FiraCodeNF-Reg +zero +cv06";
       # Additional configuration
       enable_audio_bell = false;
       remember_window_size = false;
-      initial_window_width = 640;
-      initial_window_height = 400;
-      # Apply Stylix colors
-      foreground = config.lib.stylix.colors.base05;
-      background = config.lib.stylix.colors.base00;
+      initial_window_width = 800;
+      initial_window_height = 500;
+      # Style tab bar
+      # TODO: Style Kitty tab bar
     };
   };
 }
