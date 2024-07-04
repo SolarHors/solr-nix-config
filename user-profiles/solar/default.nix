@@ -29,6 +29,9 @@
     # Configure Kitty terminal emulator
     ../../user-modules/kitty.nix
 
+    # Enable a Discord client
+    ../../user-modules/discord.nix
+
     # Configure Librewolf
     ../../user-modules/librewolf.nix
 
@@ -50,14 +53,9 @@
 
   # Install user packages
   home.packages = with pkgs; [
-    #alacritty                # GPU-accelerated terminal emulator
-    #foot                     # Minimalistic Wayland terminal emulator
-    #kitty                    # Hackable, featureful, OpenGL based terminal emulator
-    #librewolf                # Firefox fork, focused on privacy and security
     tor-browser              # Hardened browser utilizing the Tor network
     thunderbird              # Fully-featured E-mail client
     telegram-desktop         # Telegram Desktop messaging app
-    webcord                  # Discord client implemented without Discord API
     iamb                     # Matrix chat client in the terminal
     blender-hip              # Blender with hardware accelerated rendering
     keepassxc                # Offline password manager
@@ -70,9 +68,11 @@
     pika-backup              # Backup utility based on borg
     ffmpeg                   # A solution to manipulate audio and video
     mpv                      # Media player
+    amberol                  # A simple music player
     papirus-icon-theme       # Papirus icon theme
     tealdeer                 # Simplified and community-driven man pages
     yt-dlp                   # Tool to download videos from YouTube
+    via                      # Keyboard configuration utility
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
