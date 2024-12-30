@@ -36,30 +36,30 @@
 
   # Set default fonts
   stylix.fonts = {
-    serif = {
-      package = pkgs.noto-fonts;
-      name = "Noto Serif";
-    };
-
-    sansSerif = {
-      package = pkgs.noto-fonts;
-      name = "Noto Sans";
-    };
-
-    monospace = {
-      package = pkgs.fira-code;
-      name = "Fira Code";
-    };
-
-    emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
-
     # Set application font size
     sizes.applications = 10;
     sizes.desktop = 10;
     sizes.popups = 10;
     sizes.terminal = 11;
+
+    # serif = {
+    #   package = pkgs.noto-fonts;
+    #   name = "Noto Serif";
+    # };
+
+    # sansSerif = {
+    #   package = pkgs.noto-fonts;
+    #   name = "Noto Sans";
+    # };
+
+    # monospace = {
+    #   package = pkgs.fira-code;
+    #   name = "Fira Code";
+    # };
+
+    # emoji = {
+    #   package = pkgs.noto-fonts-emoji;
+    #   name = "Noto Color Emoji";
+    # };
   };
 }
