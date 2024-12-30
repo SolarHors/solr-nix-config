@@ -18,6 +18,9 @@
     enable = true;
     package = pkgs.librewolf;
 
+    # Enable Tridactyl native messaging support
+    nativeMessagingHosts = [ pkgs.tridactyl-native ];
+
     # Configure the main profile
     # See all avaliable options at:
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.enable
@@ -25,74 +28,51 @@
       id = 0;
       isDefault = true;
       
-      # TODO: Load bookmarks from sops-encrypted json backup
+      # TODO: Safely load bookmarks
       # Load the bookmarks
-      #bookmarks = (builtins.fromJSON (builtins.readFile ./main-bookmarks.json));
-      bookmarks = {};
+      # bookmarks = (builtins.fromJSON (builtins.readFile ./main-bookmarks.json));
 
       # Install extensions per profile from Nix User Repositories (NUR)
       # https://nur.nix-community.org/
-      # NOTE: I did not enable NUR by default in this config
-      # so follow their documentation
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   ublock-origin    # Efficient wide-spectrum content blocker
-      #   decentraleyes    # Local content delivery network emulation
-      #   canvasblocker    # Alters JS APIs to prevent fingerprinting
-      #   sponsorblock     # Skip YouTube video sponsors
-      #   darkreader       # Dark mode for every website
-      # ]
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        tridactyl        # Vim-like interface for Firefox
+        ublock-origin    # Efficient wide-spectrum content blocker
+        decentraleyes    # Local content delivery network emulation
+        canvasblocker    # Alters JS APIs to prevent fingerprinting
+        sponsorblock     # Skip YouTube video sponsors
+        darkreader       # Dark mode for every website
+      ];
+
+      # Set a minimal style inspired by qutebrowser
+      # https://github.com/rockofox/firefox-minima
+      userChrome = ''
+        @import "${
+          builtins.fetchGit {
+              url = "https://github.com/rockofox/firefox-minima";
+              ref = "main";
+              rev = "dc40a861b24b378982c265a7769e3228ffccd45a"; # Update commit hash
+          }
+        }/userChrome.css";
+      '';
 
       # Configure profile settings
       settings = {
+        # Enable autoscroll
         "general.autoScroll" = true;
+        # Enable user styles
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+        # Less private, sensible overrides:
+        # Disable RFP
+        "privacy.resistFingerprinting" = false;
+        # Enable WebGL
+        "webgl.disabled" = false;
+        # 
       };
 
       # Force replace the existing containers configuration
       containersForce = true;
-
-      # Set up tab containers
-      containers = {
-        Bluesky = {
-          color = "blue";
-          icon = "circle";
-          id = 1;
-        };
-        Tumblr = {
-          color = "pink";
-          icon = "circle";
-          id = 2;
-        };
-        ActivityPub = {
-          color = "purple";
-          icon = "circle";
-          id = 3;
-        };
-        Discord = {
-          color = "purple";
-          icon = "circle";
-          id = 4;
-        };
-        Matrix = {
-          color = "green";
-          icon = "circle";
-          id = 5;
-        };
-        Revolt = {
-          color = "red";
-          icon = "circle";
-          id = 6;
-        };
-        Git = {
-          color = "yellow";
-          icon = "circle";
-          id = 7;
-        };
-        Art = {
-          color = "blue";
-          icon = "circle";
-          id = 8;
-        };
-      };
+      containers = {};
     };
 
     # Configure the container profile
@@ -100,13 +80,23 @@
       id = 1;
 
       # Load the bookmarks
-      #bookmarks = (builtins.fromJSON (builtins.readFile ./container-bookmarks.json));
-      bookmarks = {};
+      # bookmarks = (builtins.fromJSON (builtins.readFile ./container-bookmarks.json));
 
       # Configure profile settings
       settings = {
+        # Enable autoscroll
         "general.autoScroll" = true;
+        # Disable RFP
+        "privacy.resistFingerprinting" = false;
+        # Enable WebGL
         "webgl.disabled" = false;
+        # Enable user styles
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        # Save some site data
+        "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown.offlineApps" = false;
+        "privacy.clearOnShutdown.sessions" = false;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
       };
 
       # Force replace the existing containers configuration
@@ -114,32 +104,40 @@
       
       # Set up tab containers
       containers = {
-        Google = {
-          color = "red";
-          icon = "circle";
-          id = 1;
-        };
-        Yandex = {
-          color = "yellow";
-          icon = "circle";
-          id = 2;
-        };
-        University = {
-          color = "turquoise";
-          icon = "circle";
-          id = 3;
-        };
-        Services = {
-          color = "blue";
-          icon = "circle";
-          id = 4;
-        };
         Work = {
           color = "orange";
           icon = "circle";
-          id = 5;
+          id = 1;
         };
       };
+    };
+  };
+
+  # Create XDG desktop entries for both profiles
+  xdg.desktopEntries = {
+    librewolf-container = {
+      name = "Librewolf (Container)";
+      comment = "Secondary Librewolf profile";
+      genericName = "Web Browser";
+      exec = "librewolf -P container %u";
+      terminal = false;
+      type = "Application";
+      icon = "librewolf";
+      categories = [ "GNOME" "GTK" "Network" "WebBrowser" ];
+      # mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/rss+xml" "application/rdf+xml" "image/gif" "image/jpeg" "image/png" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ftp" "x-scheme-handler/chrome" "video/webm" "application/x-xpinstall" ];
+      startupNotify = true;
+    };
+    librewolf = {
+      name = "Librewolf (Main)";
+      comment = "Main Librewolf profile";
+      genericName = "Web Browser";
+      exec = "librewolf -P main %u";
+      terminal = false;
+      type = "Application";
+      icon = "librewolf";
+      categories = [ "GNOME" "GTK" "Network" "WebBrowser" ];
+      mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/rss+xml" "application/rdf+xml" "image/gif" "image/jpeg" "image/png" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ftp" "x-scheme-handler/chrome" "video/webm" "application/x-xpinstall" ];
+      startupNotify = true;
     };
   };
 }
