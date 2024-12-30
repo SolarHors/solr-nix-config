@@ -2,8 +2,14 @@
   description = "Solar's silly NixOS config!";
 
   inputs = {
-    # Nixpkgs
+    # Official Nix Package Repository
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Nix User Repository
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
@@ -41,9 +47,10 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
+    nur,
     hardware,
     stylix,
+    home-manager,
     rust-overlay,
     ...
   } @ inputs: let
@@ -52,6 +59,11 @@
     orange_config = (builtins.fromTOML (builtins.readFile ./system-profiles/orange-desktop/config.toml));
     # TOML configuration for the user profile of `solar`
     solar_config = (builtins.fromTOML (builtins.readFile ./user-profiles/solar/config.toml));
+    # Nix package overlays
+    pkgs_overlays = {
+      # NUR overlay
+      nixpkgs.overlays = [ nur.overlays.default ];
+    };
   in {
     # NixOS system configuration entrypoint
     # Available through `nixos-rebuild --flake .#HOSTNAME`
@@ -68,7 +80,10 @@
           inherit solar_config;
         };
         # System configuration
-        modules = [ ./system-profiles/orange-desktop ];
+        modules = [
+          pkgs_overlays
+          ./system-profiles/orange-desktop
+        ];
       };
     };
 
