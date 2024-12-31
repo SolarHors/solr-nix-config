@@ -15,6 +15,7 @@
     {
       "plasma" = ../../user-modules/desktop/plasma.nix;
       "hyprland" = ../../user-modules/desktop/hyprland.nix;
+      "sway" = ../../user-modules/desktop/sway.nix;
     }.${solar_config.user.desktop}
 
     # Configure user shell and console-line tools

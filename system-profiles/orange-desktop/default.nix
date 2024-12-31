@@ -26,6 +26,7 @@
     # Select desktop based on user configuration
     {
       "plasma" = ../../system-modules/desktop/plasma.nix;
+      "sway" = ../../system-modules/desktop/sway.nix;
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
     }.${solar_config.user.desktop}
 
