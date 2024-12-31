@@ -30,9 +30,6 @@
       "hyprland" = ../../system-modules/desktop/hyprland.nix;
     }.${solar_config.user.desktop}
 
-    # Enable sound and XDG portals
-    ../../system-modules/pipewire.nix
-
     # Enable SSH and GnuPG
     ../../system-modules/ssh.nix
     ../../system-modules/gpg.nix

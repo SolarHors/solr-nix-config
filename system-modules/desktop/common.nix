@@ -5,6 +5,8 @@
 {
   # Enable OpenGL drivers
   hardware.opengl.enable = true;
+  # Enable RealtimeKit system service
+  security.rtkit.enable = true;
 
   services = {
     xserver = {
@@ -15,29 +17,31 @@
       # Set X keyboard variant
       xkb.variant = "";
     };
+    # Interprocess messaging system
     dbus = {
-      # Enable D-Bus
       enable = true;
       # Include dconf's config in D-Bus
       packages = [ pkgs.dconf ];
     };
+    # API to deal with multimedia pipelines
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
     # Touchpad support
-    libinput.enable = true;  
+    libinput.enable = true;
   };
 
   # Enable dconf settings management tool
   programs.dconf.enable = true;
 
-  # Configure desktop portal for wlroots-based desktops
+  # Enable desktop portals
   xdg.portal = {
     enable = true;
-    # TODO: Find out why it conflicts with hyprland
-    # and if it's needed at all
-    #wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal
-      xdg-desktop-portal-gtk
-    ];
+    # Make xdg-open use the portal to open programs
+    xdgOpenUsePortal = true;
   };
 
   # Install additional packages
@@ -47,6 +51,11 @@
     libsForQt5.qt5.qtwayland        # Qt5 Wayland support
   ];
 
-  # Hint electron apps to use wayland
+  # Set Wayland-specific environment variables:
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
+  environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
+  environment.sessionVariables.SDL_VIDEODRIVER = "wayland";
+  environment.sessionVariables.ELM_DISPLAY = "wl";
+  environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
 }
