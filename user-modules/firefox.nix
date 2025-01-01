@@ -19,6 +19,7 @@
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
       DisablePocket = true;
+      NoDefaultBookmarks = true;
 
       NetworkPrediction = false;
       CaptivePortal = false;
@@ -49,22 +50,22 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
         };
-        "Decentraleyes@ThomasRientjes" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
-          installation_mode = "normal_installed";
-        };
-        "CanvasBlocker@kkapsner.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/canvasblocker/latest.xpi";
-          installation_mode = "normal_installed";
-        };
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          installation_mode = "normal_installed";
-        };
-        "sponsorBlocker@ajay.app" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-          installation_mode = "normal_installed";
-        };
+        # "Decentraleyes@ThomasRientjes" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
+        # "CanvasBlocker@kkapsner.net" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/canvasblocker/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
+        # "addon@darkreader.org" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
+        # "sponsorBlocker@ajay.app" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
       };
     };
 
@@ -82,14 +83,14 @@
 
       # Install extensions per profile from Nix User Repositories (NUR)
       # https://nur.nix-community.org/
-      # NOTE: I did not enable NUR by default in this config
-      # so follow their documentation
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   ublock-origin    # Efficient wide-spectrum content blocker
-      #   canvasblocker    # Alters JS APIs to prevent fingerprinting
-      #   sponsorblock     # Skip YouTube video sponsors
-      #   darkreader       # Dark mode for every website
-      # ]
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        # ublock-origin    # Efficient wide-spectrum content blocker
+        tridactyl        # Vim-like interface for Firefox
+        decentraleyes    # Local content delivery network emulation
+        canvasblocker    # Alters JS APIs to prevent fingerprinting
+        sponsorblock     # Skip YouTube video sponsors
+        darkreader       # Dark mode for every website
+      ]
 
       # Set default search engine
       search = {
@@ -102,6 +103,18 @@
           "Bing".metaData.hidden = true;
         };
       };
+
+      # Set a minimal style inspired by qutebrowser
+      # https://github.com/rockofox/firefox-minima
+      userChrome = ''
+        @import "${
+          builtins.fetchGit {
+              url = "https://github.com/rockofox/firefox-minima";
+              ref = "main";
+              rev = "dc40a861b24b378982c265a7769e3228ffccd45a"; # Update commit hash
+          }
+        }/userChrome.css";
+      '';
 
       # Configure profile settings
       settings = {
@@ -225,48 +238,7 @@
       containersForce = true;
 
       # Set up tab containers
-      containers = {
-        bluesky = {
-          color = "blue";
-          icon = "circle";
-          id = 1;
-        };
-        tumblr = {
-          color = "pink";
-          icon = "circle";
-          id = 2;
-        };
-        activitypub = {
-          color = "purple";
-          icon = "circle";
-          id = 3;
-        };
-        discord = {
-          color = "purple";
-          icon = "circle";
-          id = 4;
-        };
-        matrix = {
-          color = "green";
-          icon = "circle";
-          id = 5;
-        };
-        revolt = {
-          color = "red";
-          icon = "circle";
-          id = 6;
-        };
-        git = {
-          color = "yellow";
-          icon = "circle";
-          id = 7;
-        };
-        art = {
-          color = "blue";
-          icon = "circle";
-          id = 8;
-        };
-      };
+      containers = {};
     };
 
     # Configure the container profile
@@ -297,30 +269,10 @@
       
       # Set up tab containers
       containers = {
-        google = {
-          color = "red";
-          icon = "circle";
-          id = 1;
-        };
-        yandex = {
-          color = "yellow";
-          icon = "circle";
-          id = 2;
-        };
-        university = {
-          color = "turquoise";
-          icon = "circle";
-          id = 3;
-        };
-        services = {
-          color = "blue";
-          icon = "circle";
-          id = 4;
-        };
         work = {
           color = "orange";
           icon = "circle";
-          id = 5;
+          id = 1;
         };
       };
     };
