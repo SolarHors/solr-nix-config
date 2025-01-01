@@ -8,11 +8,6 @@
     ./common.nix
   ];
 
-  # Install KDE portal for Qt5 applications
-  environment.systemPackages = with pkgs; [
-    libsForQt5.xdg-desktop-portal-kde
-  ];
-
   # Add KDE Qt5 portal
   xdg.portal.extraPortals = with pkgs; [
     libsForQt5.xdg-desktop-portal-kde
