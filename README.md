@@ -11,7 +11,7 @@ This is my personal NixOS and Home Manager configuration using [flakes](https://
 ## TODO
 
 - [ ] Figure out how Cachix for Hyprland works or remove it
-- [ ] Declarative flatpak configuration (focusing on user applications)
+- [ ] ~~Declarative flatpak configuration (focusing on user applications)~~
 - [ ] Use adw-gtk3 for GTK3 apps
 - [ ] Move libvirtd user group assignment into virt.nix
 - [ ] Possibly remove Stylix from specialArgs and use inputs
@@ -42,3 +42,4 @@ Thanks to the people below for writing informative and (mostly) comprehensive co
 - [librephoenix/nixos-config](https://gitlab.com/librephoenix/nixos-config/)
 - [Misterio77/nix-config](https://github.com/Misterio77/nix-config)
 - [Misterio77/nix-starter-configs](https://github.com/Misterio77/nix-starter-configs)
+- [TLATER/dotfiles](https://github.com/TLATER/dotfiles)
