@@ -35,7 +35,7 @@
     ../../system-modules/gpg.nix
 
     # Enable Open Tablet Driver
-    ../../system-modules/otd.nix
+    # ../../system-modules/otd.nix
 
     # Install font packages
     ../../system-modules/fonts.nix
@@ -187,6 +187,7 @@
     wget                            # Tool for retrieving remote files
     curl                            # Tool for transferring files with URL syntax
     git                             # Distributed version control system
+    libwacom                        # Libraries and configurations for Wacom tablets
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
