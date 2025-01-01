@@ -3,21 +3,6 @@
 
 { config, pkgs, inputs, orange_config, solar_config, ... }:
 
-let
-  # Prepare dbus session variables. Run at the end of sway config.
-  # See this link for more information:
-  # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
-  dbus-sway-environment = pkgs.writeTextFile {
-    name = "dbus-sway-environment";
-    destination = "/bin/dbus-sway-environment";
-    executable = true;
-
-    text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-      systemctl --user restart pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-    '';
-  };
-in
 {
   imports = [
     ./common.nix
@@ -55,7 +40,7 @@ in
     grim             # Grab images from a Wayland compositor
     slurp            # Select a region in a Wayland compositor
     wf-recorder      # Screen recording from a Wayland compositor
-    wl-clipboard      # Command-line copy/paste utilities
+    wl-clipboard     # Command-line copy/paste utilities
     mako             # Wayland notification daemon
     tofi             # Dynamic menu
     wlsunset         # Day/night gamma adjustments
