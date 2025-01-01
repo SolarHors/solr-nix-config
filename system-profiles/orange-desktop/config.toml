@@ -6,7 +6,11 @@
 [hardware]
 # UUID of the partition that contains the encrypted LUKS root
 # Leave empty if no encryption is used
-cryptroot_uuid = "f352f3cb-534a-4c8f-9d6a-8663a3551707"
+cryptroot_uuid = "e32cc1df-6798-48bc-93ca-b364e17597b1"
+# UUID of a secondary encrypted storage drive to be added to crypttab
+# Is unlocked with a key located at `/etc/storage.key`
+# Leave empty to not mount the drive
+cryptstorage_uuid = "bab5227a-e50d-4143-b246-b19f7989d161"
 
 [system]
 # Name of this PC

@@ -100,6 +100,23 @@
       };
   };
 
+  # Add secondary storage drive to fstab
+  fileSystems."/media/storage" = if orange_config.hardware.cryptstorage_uuid == ""
+  then {}
+  else {
+    device = "/dev/mapper/cryptstorage";
+    fsType = "btrfs";
+    options = ["defaults" "noatime" "compress=zstd"];
+  };
+
+  # Unlock secondary storage drive after boot
+  environment.etc.crypttab.text = 
+  if orange_config.hardware.cryptstorage_uuid == ""
+  then ""
+  else ''
+    cryptstorage UUID=${orange_config.hardware.cryptstorage_uuid} /etc/storage.key luks
+  '';
+
   # Hardware configuration for AMD
   hardware = {
     # Update the CPU microcode
